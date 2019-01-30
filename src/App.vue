@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Recipes app yo!" />
+    <HelloWorld />
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
+// import Recipe from "./components/Recipe.vue";
 
 export default {
   name: "app",
@@ -14,6 +15,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-</style>
