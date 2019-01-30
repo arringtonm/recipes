@@ -70,6 +70,12 @@ export default {
   flex-direction: column;
   margin: 5em 5em auto;
   min-width: 21em;
+  box-sizing: border-box;
+  padding: 2em;
+  padding-top: 5em;
+  border: 1px solid #DDD;
+  background-color: rgba(255,253,208,0.5);
+
 }
 h1 {
   margin-top: 0px;
@@ -93,7 +99,7 @@ h1 {
 .header-text {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
 }
 ul {
   /* display: inline; */
