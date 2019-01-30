@@ -1,23 +1,40 @@
 <template>
   <div class="recipe">
-    <h3>{{ name }}
-      <i
-        class="material-icons shift-down"
-        @click="favorite = !favorite">
-          {{ favorite ? "favorite" : "favorite_border" }}
-      </i>
-    </h3>
-    <p class="description">{{ description }}</p>
-    <p>
-      Tags:
-      <md-button v-for="tag in keywords" :key="tag" class="md-raised">{{
-        tag
-      }}</md-button>
-    </p>
-    <p>Ingredients:</p>
-    <ul>
-      <li v-for="ingredient in ingredients" :key="ingredient">{{ ingredient }}</li>
-    </ul>
+
+    <div class="header">
+      <div class="header-text">
+        <h1>
+          {{ name }}
+          <i class="material-icons favorite" @click="favorite = !favorite">
+            {{ favorite ? "favorite" : "favorite_border" }}
+          </i>
+        </h1>
+        <p class="description">{{ description }}</p>
+        <p>
+          Tags:
+          <md-button v-for="tag in keywords" :key="tag" class="md-raised">{{
+            tag
+          }}</md-button>
+        </p>
+      </div>
+      <img :src="image" class="featured-image">
+    </div>
+    <div class="ingredients-instructions-holder">
+      <div class="ingredients">
+        <p>Ingredients:</p>
+        <ul>
+          <li v-for="ingredient in ingredients" :key="ingredient">
+            {{ ingredient }}
+          </li>
+        </ul>
+      </div>
+      <div class="instructions">
+        <p>Instructions:</p>
+        <ol>
+          <li v-for="step in instructions" :key="step">{{ step }}</li>
+        </ol>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,33 +56,72 @@ export default {
     recipeCusine: String,
     recipeInstructions: Array,
     recipeYield: Number,
-    totalTime: Number
+    totalTime: Number,
+    image: String,
+    instructions: Array
   }
 };
 </script>
 
 <style scoped>
-.recipe {
-  margin: 5em;
 
+.recipe {
+  display: flex;
+  flex-direction: column;
+  margin: 5em 5em auto;
+  min-width: 21em;
+}
+h1 {
+  margin-top: 0px;
+}
+.ingredients-instructions-holder {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.ingredients, .instructions {
+  min-width: 30em;
+  max-width: 40em;
+  /* flex-grow: 1.5; */
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3em;
+  /* border-top: 1px solid red; */
+}
+.header-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 ul {
   /* display: inline; */
   list-style-type: none;
 }
-ul li {
-  padding: 0.25em;
+li {
+  /* padding: 0.25em; */
   /* border: 1px solid #DDD; */
   /* display: inline; */
   margin-right: 0.5em;
+  line-height: 1.5em;
+  padding-bottom: 0.75em;
 }
 p.description {
   font-style: italic;
+  font-size: 1.25em;
+  font-weight: 300;
+  width: 35em;
+  line-height: 1.25em;
 }
-.shift-down {
-  transform: translate(0.25em, 0.25em);
+.favorite {
+  color: red;
 }
-.shift-down:hover {
+.favorite:hover {
   cursor: pointer;
+}
+.featured-image {
+  width: 500px;
+  height: 300px;
 }
 </style>

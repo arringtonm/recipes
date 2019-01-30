@@ -1,8 +1,8 @@
 # Recipe storage/search web app
 
-## Author/description
+## Author and description
 
-This is an early phase work in progress project by Michael Arrington [https//arrington.tech]. It's distributed with a MIT license. 
+This is an early phase work in progress project by Michael Arrington [https://arrington.tech]. It's distributed with a MIT license. 
 
 
 ## Project setup
