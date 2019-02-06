@@ -4,10 +4,14 @@
       name="Pressure Cooker Stew"
       description="So tasty you'll want to eat it a lot"
       :keywords="this.myTags" /> -->
+    <!-- <h1>Recipes:</h1> -->
+    <RecipeNav :recipes="this.recipes" />
     <Recipe
       v-for="(recipe, index) in recipes"
       v-bind="recipes[index]"
-      :key="recipe.id"/>
+      :key="recipe.id"
+      class="truncated"
+    />
   </div>
 </template>
 
@@ -18,7 +22,8 @@ export default {
   //   msg: String
   // },
   components: {
-    Recipe
+    Recipe,
+    RecipeNav
   },
   data: function() {
     return {
@@ -82,6 +87,42 @@ export default {
             "In a pressure cooker, combine pork, tomatillos, Poblano peppers, Anaheim peppers, serrano peppers, onion, garlic, cumin, and a big pinch of salt. Heat over high heat until gently sizzling, then seal pressure cooker, bring to high pressure, and cook for 30 minutes. Release pressure.",
             "Using tongs, transfer pork pieces to a bowl and set aside. Add cilantro and fish sauce to remaining contents of pressure cooker. Blend with an immersion blender or in a countertop blender, then season to taste with salt. Return pork to sauce and stir gently to combine. Serve immediately with tortillas and lime wedges."
           ]
+        },
+        {
+          id: 2,
+          name:
+            "30-Minute Pressure Cooker Pho Ga (Vietnamese Chicken Noodle Soup) Recipe",
+          keywords: ["Vietnamese", "Pressure Cooker"],
+          description:
+            "Pho bo—Vietnamese beef noodle soup—may be more popular in the states, but its cousin pho ga, made with chicken, is easier to make, and in my book, just as tasty. What if I told you that you could make a superb bowl of Vietnamese chicken noodle soup with rich, aromatic broth and fall-off-the-bone tender chicken, all in under half an hour? The pressure cooker comes to the rescue.",
+          image: "http://lorempixel.com/500/300/food",
+          ingredients: [
+            "2 medium yellow onions, split in half",
+            "1 small hand of ginger, roughly sliced",
+            "1 small bunch cilantro",
+            "3 star anise pods",
+            "1 cinnamon stick",
+            "4 cloves",
+            "1 teaspoon fennel seeds",
+            "1 teaspoon coriander seeds",
+            "6 to 8 chicken drumsticks",
+            "1/4 cup fish sauce, plus more to taste",
+            "2 tablespoons rock sugar or raw sugar, plus more to taste",
+            "4 servings pho noodles, prepared according to package directions",
+            "1 small white or yellow onion, thinly sliced",
+            "1/2 cup thinly sliced scallions",
+            "2 cups mixed herbs (cilantro, basil, and mint)",
+            "2 cups trimmed bean sprouts",
+            "Thinly sliced Thai chilis",
+            "2 limes, each cut into 4 wedges",
+            "Hoisin sauce and Sriracha"
+          ],
+          instructions: [
+            "Heat oil in a pressure cooker over high heat until smoking. Add halved onions and ginger, cut side down. Cook without moving, reducing heat if smoking excessively, until onion and ginger are well charred, about 5 minutes.",
+            "Add cilantro, star anise, cinnamon, cloves, fennel seed, coriander, and chicken to the pot. Add 2 quarts of water, the fish sauce, and the sugar to the pot. Seal the pressure cooker and bring it to high pressure over high heat. Cook on high pressure for 20 minutes, then shock under cold running water in the sink (or release pressure valve if using an electric pressure cooker).",
+            "Open pressure cooker. Transfer chicken legs to a plate. Pour broth through a fine mesh strainer into a clean pot and discard solids. Skim any scum off the surface of the broth using a ladle, but leave the small bubbles of fat intact. Season broth to taste with more fish sauce and sugar if desired.",
+            "To serve, place re-hydrated pho noodles in individual noodle bowls. Top with chicken legs, sliced onions, and scallions. Pour hot broth over chicken and noodles. Serve immediately, allowing guests to add herbs, bean sprouts, chilis, lime, and sauces as they wish."
+          ]
         }
       ]
     };
@@ -89,4 +130,22 @@ export default {
 };
 
 import Recipe from "./Recipe.vue";
+import RecipeNav from "./RecipeNav.vue";
 </script>
+
+<style scoped>
+.truncated {
+  display: block;
+  max-height: 30em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+}
+/* .showmore {
+  display: inline;
+  color: red;
+  }
+.showmore:hover {
+  cursor: pointer;
+} */
+</style>

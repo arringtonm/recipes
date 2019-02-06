@@ -1,6 +1,5 @@
 <template>
   <div class="recipe">
-
     <div class="header">
       <div class="header-text">
         <h1>
@@ -16,8 +15,9 @@
             tag
           }}</md-button>
         </p>
+        <h3 class="showmore">Show more...</h3>
       </div>
-      <img :src="image" class="featured-image">
+      <img :src="image" class="featured-image" />
     </div>
     <div class="ingredients-instructions-holder">
       <div class="ingredients">
@@ -64,7 +64,6 @@ export default {
 </script>
 
 <style scoped>
-
 .recipe {
   display: flex;
   flex-direction: column;
@@ -73,9 +72,8 @@ export default {
   box-sizing: border-box;
   padding: 2em;
   padding-top: 5em;
-  border: 1px solid #DDD;
-  background-color: rgba(255,253,208,0.5);
-
+  border: 1px solid #ddd;
+  background-color: rgba(255, 253, 208, 0.2);
 }
 h1 {
   margin-top: 0px;
@@ -85,7 +83,8 @@ h1 {
   flex-direction: row;
   flex-wrap: wrap;
 }
-.ingredients, .instructions {
+.ingredients,
+.instructions {
   min-width: 30em;
   max-width: 40em;
   /* flex-grow: 1.5; */
@@ -115,7 +114,7 @@ li {
 }
 p.description {
   font-style: italic;
-  font-size: 1.25em;
+  font-size: 1.1em;
   font-weight: 300;
   width: 35em;
   line-height: 1.25em;
