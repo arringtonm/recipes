@@ -1,33 +1,68 @@
 <template>
   <div>
+    <!-- <RecipeNav :recipes="this.recipes" /> -->
     <!-- <Recipe
-      name="Pressure Cooker Stew"
-      description="So tasty you'll want to eat it a lot"
-      :keywords="this.myTags" /> -->
-    <!-- <h1>Recipes:</h1> -->
-    <RecipeNav :recipes="this.recipes" />
-    <Recipe
       v-for="(recipe, index) in recipes"
       v-bind="recipes[index]"
       :key="recipe.id"
       class="truncated"
-    />
+    /> -->
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "HelloWorld",
-  // props: {
-  //   msg: String
-  // },
   components: {
     Recipe,
     RecipeNav
   },
+  methods: {
+    getRecipes: function() {
+      axios({
+        method: "get",
+        url: "https://recipe-f536.restdb.io/rest/recipes",
+        headers: {
+          "x-apikey": "5c87da44cac6621685acbe47"
+        }
+      })
+        .then(function(response) {
+          // console.log(response.data);
+        })
+        .catch(function(error) {
+          // console.log({ error });
+        });
+    },
+    pushRecipes: function() {
+      const dateId = new Date().getTime();
+      axios({
+        method: "post",
+        url: `https://recipe-f536.restdb.io/rest/recipes`,
+        headers: {
+          "x-apikey": "5c87da44cac6621685acbe47"
+        },
+        data: {
+          id: dateId,
+          name: "favorite new recipe",
+          keywords: ["new", "pressure cooker"],
+          description: "blah blah blah blah blah"
+        }
+      })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  },
+  mounted: function() {
+    // this.pushRecipes();
+  },
   data: function() {
     return {
-      // myTags: ["Spicy", "Vegetarian"],
       recipes: [
         {
           id: 0,
@@ -139,7 +174,6 @@ import RecipeNav from "./RecipeNav.vue";
   max-height: 30em;
   overflow: hidden;
   text-overflow: ellipsis;
-  /* white-space: nowrap; */
 }
 /* .showmore {
   display: inline;

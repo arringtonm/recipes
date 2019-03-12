@@ -15,7 +15,7 @@
             tag
           }}</md-button>
         </p>
-        <h3 class="showmore">Show more...</h3>
+        <md-button class="md-raised">Show more...</md-button>
       </div>
       <img :src="image" class="featured-image" />
     </div>
@@ -126,6 +126,7 @@ p.description {
   cursor: pointer;
 }
 .featured-image {
+  /* display: none; */
   width: 500px;
   height: 300px;
 }
