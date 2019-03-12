@@ -1,12 +1,12 @@
 <template>
   <div>
     <!-- <RecipeNav :recipes="this.recipes" /> -->
-    <!-- <Recipe
+    <Recipe
       v-for="(recipe, index) in recipes"
       v-bind="recipes[index]"
       :key="recipe.id"
       class="truncated"
-    /> -->
+    />
   </div>
 </template>
 
@@ -26,29 +26,29 @@ export default {
         method: "get",
         url: "https://recipe-f536.restdb.io/rest/recipes",
         headers: {
-          // fix this to use a .env
-          "x-apikey": "5c87da44cac6621685acbe47"
+          "x-apikey": API_KEY
         }
       })
-        .then(function(response) {
-          // console.log(response.data);
+        .then(response => {
+          const { data, status } = response;
+          this.recipes = [...data];
         })
         .catch(function(error) {
-          // console.log({ error });
+          console.log({ error });
         });
     },
     // method for uploading a recipe
-    pushRecipe: function(recipe) { 
+    pushRecipe: function(recipe) {
       axios({
         method: "post",
         url: `https://recipe-f536.restdb.io/rest/recipes`,
         headers: {
-          "x-apikey": "5c87da44cac6621685acbe47"
+          "x-apikey": API_KEY
         },
         data: recipe
       })
         .then(function(response) {
-          console.log(response);
+          this.recipes.push(response);
         })
         .catch(function(error) {
           console.log(error);
@@ -57,11 +57,11 @@ export default {
     bigPush: function() {
       this.recipes.forEach(recipe => {
         this.pushRecipe(recipe);
-      }); 
+      });
     }
   },
   mounted: function() {
-    console.log(API_KEY);
+    this.getRecipes();
   },
   data: function() {
     return {

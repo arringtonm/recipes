@@ -4,7 +4,7 @@ import "./registerServiceWorker";
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
-import apiKey from "./.env";
+import API_KEY from "./.env";
 
 Vue.use(VueMaterial);
 

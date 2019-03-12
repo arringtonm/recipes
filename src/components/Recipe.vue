@@ -15,7 +15,7 @@
             tag
           }}</md-button>
         </p>
-        <md-button class="md-raised">Show more...</md-button>
+        <!-- <md-button class="md-raised">Show more...</md-button> -->
       </div>
       <img :src="image" class="featured-image" />
     </div>
