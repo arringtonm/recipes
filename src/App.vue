@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <Main />
+    <Home />
   </div>
 </template>
 
 <script>
-import Main from "./components/Main.vue";
+import Home from "./components/Home.vue";
 // import Recipe from "./components/Recipe.vue";
 
 export default {
   name: "app",
   components: {
-    Main
+    Home
   }
 };
 </script>

@@ -7,10 +7,16 @@
     />
     <!-- <RecipeNav :recipes="searchFiltered" /> -->
     <div class="recipe-holder">
-      <Recipe
+      <!-- <Recipe
         v-for="(recipe, index) in searchFiltered"
         v-bind="recipes[index]"
         :key="recipe.id"
+      /> -->
+      <RecipeCard
+        v-for="(recipe, index) in searchFiltered"
+        v-bind="recipes[index]"
+        :key="recipe.id"
+        @favoriteUpdated="updateFavorite(recipe)"
       />
     </div>
   </div>
@@ -20,10 +26,11 @@
 import axios from "axios";
 
 export default {
-  name: "Main",
+  name: "Home",
   components: {
     Recipe,
-    RecipeNav,
+    RecipeCard,
+    // RecipeNav,
     SearchBar
   },
   methods: {
@@ -39,7 +46,7 @@ export default {
       })
         .then(response => {
           // eslint-disable-next-line
-          const { data, status } = response;
+          const { data } = response;
           this.recipes = [...data];
         })
         .catch(function(error) {
@@ -66,11 +73,34 @@ export default {
           console.log(error);
         });
     },
-    bigPush: function() {
-      this.recipes.forEach(recipe => {
-        this.pushRecipe(recipe);
-      });
+    updateFavorite: function(recipe) {
+      recipe.favorite = !recipe.favorite;
+      console.log(recipe._id);
+      console.log(recipe.favorite);
+
+      axios({
+        method: "patch",
+        url: `https://recipe-f536.restdb.io/rest/recipes/${recipe._id}`,
+        headers: {
+          // eslint-disable-next-line
+          "x-apikey": API_KEY
+        },
+        data: { favorite: recipe.favorite }
+      })
+        .then(function(response) {
+          // this.recipes.push(response);
+        })
+        .catch(function(error) {
+          // eslint-disable-next-line
+          console.log(error);
+        });
     }
+
+    // bigPush: function() {
+    //   this.recipes.forEach(recipe => {
+    //     this.pushRecipe(recipe);
+    //   });
+    // }
   },
   mounted: function() {
     this.getRecipes();
@@ -199,7 +229,8 @@ export default {
 };
 
 import Recipe from "./Recipe.vue";
-import RecipeNav from "./RecipeNav.vue";
+// import RecipeNav from "./RecipeNav.vue";
+import RecipeCard from "./RecipeCard.vue";
 import SearchBar from "./SearchBar.vue";
 </script>
 
