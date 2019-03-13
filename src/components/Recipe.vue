@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div class="recipe">
     <div class="header">
       <div class="header-text">
@@ -15,7 +15,7 @@
             tag
           }}</md-button>
         </p>
-        <!-- <md-button class="md-raised">Show more...</md-button> -->
+        <md-button class="md-raised">Show more...</md-button>
       </div>
       <img :src="image" class="featured-image" />
     </div>
@@ -36,9 +36,54 @@
       </div>
     </div>
   </div>
+</template>-->
+
+<template>
+  <div class="md-card-holder">
+    <md-card>
+      <md-card-header>
+        <div class="md-title">{{ name }}</div>
+        <md-card-subheader>{{ description }}</md-card-subheader>
+        <md-card-content>
+          <md-button v-for="tag in keywords" :key="tag">{{ tag }}</md-button>
+        </md-card-content>
+        <!-- <img :src="image" class="featured-image" /> -->
+
+        <md-card-expand>
+          <md-card-actions md-alignment="space-between">
+            <div>
+              <i class="material-icons favorite" @click="favorite = !favorite">
+                {{ favorite ? "favorite" : "favorite_border" }}
+              </i>
+            </div>
+
+            <md-card-expand-trigger>
+              <md-button class="md-icon-button">
+                <md-icon>keyboard_arrow_down</md-icon>
+              </md-button>
+            </md-card-expand-trigger>
+          </md-card-actions>
+
+          <md-card-expand-content>
+            <md-card-content
+              ><ul>
+                <li v-for="ingredient in ingredients" :key="ingredient">
+                  {{ ingredient }}
+                </li>
+              </ul>
+              <ol>
+                <li v-for="step in instructions" :key="step">{{ step }}</li>
+              </ol>
+            </md-card-content>
+          </md-card-expand-content>
+        </md-card-expand>
+      </md-card-header>
+    </md-card>
+  </div>
 </template>
 
 <script>
+// import VueMaterial from "vue-material";
 export default {
   name: "Recipe",
   props: {
@@ -64,70 +109,21 @@ export default {
 </script>
 
 <style scoped>
-.recipe {
-  display: flex;
-  flex-direction: column;
-  margin: 5em 5em auto;
-  min-width: 21em;
-  box-sizing: border-box;
-  padding: 2em;
-  padding-top: 5em;
-  border: 1px solid #ddd;
-  background-color: rgba(255, 253, 208, 0.2);
-}
-h1 {
-  margin-top: 0px;
-}
-.ingredients-instructions-holder {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.ingredients,
-.instructions {
-  min-width: 30em;
-  max-width: 40em;
-  /* flex-grow: 1.5; */
-}
-.header {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 3em;
-  /* border-top: 1px solid red; */
-}
-.header-text {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-evenly; */
-}
-ul {
-  /* display: inline; */
-  list-style-type: none;
-}
-li {
-  /* padding: 0.25em; */
-  /* border: 1px solid #DDD; */
-  /* display: inline; */
-  margin-right: 0.5em;
-  line-height: 1.5em;
-  padding-bottom: 0.75em;
-}
-p.description {
-  font-style: italic;
-  font-size: 1.1em;
-  font-weight: 300;
-  width: 35em;
-  line-height: 1.25em;
-}
 .favorite {
   color: red;
 }
 .favorite:hover {
   cursor: pointer;
 }
-.featured-image {
-  /* display: none; */
-  width: 500px;
-  height: 300px;
+.md-card-holder {
+  /* display: inline-block; */
+  display: flex;
+}
+.md-card {
+  min-width: 350px;
+  width: 30vw;
+  margin: 1em;
+  display: inline;
+  vertical-align: top;
 }
 </style>

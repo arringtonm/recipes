@@ -3,14 +3,16 @@
     <SearchBar
       :searchTerm="searchTerm"
       @searchTermUpdated="searchTerm = $event"
+      @searchReset="searchTerm = null"
     />
-    <RecipeNav :recipes="searchFiltered" />
-    <Recipe
-      v-for="(recipe, index) in searchFiltered"
-      v-bind="recipes[index]"
-      :key="recipe.id"
-      class="truncated"
-    />
+    <!-- <RecipeNav :recipes="searchFiltered" /> -->
+    <div class="recipe-holder">
+      <Recipe
+        v-for="(recipe, index) in searchFiltered"
+        v-bind="recipes[index]"
+        :key="recipe.id"
+      />
+    </div>
   </div>
 </template>
 
@@ -201,18 +203,10 @@ import RecipeNav from "./RecipeNav.vue";
 import SearchBar from "./SearchBar.vue";
 </script>
 
-<style scoped>
-.truncated {
-  display: block;
-  max-height: 30em;
-  overflow: hidden;
-  text-overflow: ellipsis;
+<style>
+.recipe-holder {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto auto;
 }
-/* .showmore {
-  display: inline;
-  color: red;
-  }
-.showmore:hover {
-  cursor: pointer;
-} */
 </style>
