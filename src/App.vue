@@ -15,3 +15,13 @@ export default {
   }
 };
 </script>
+
+<style>
+body {
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>

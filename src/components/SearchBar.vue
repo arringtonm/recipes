@@ -35,7 +35,7 @@ export default {
 
 <style>
 #searchinputholder {
-  background-color: red;
+  /* background-color: red; */
   flex-grow: 1;
   display: inline;
 }

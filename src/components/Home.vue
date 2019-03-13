@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="center-panel md-elevation-20"> 
     <SearchBar
       :searchTerm="searchTerm"
       @searchTermUpdated="searchTerm = $event"
@@ -7,17 +7,15 @@
     />
     <!-- <RecipeNav :recipes="searchFiltered" /> -->
     <div class="recipe-holder">
-      <!-- <Recipe
-        v-for="(recipe, index) in searchFiltered"
-        v-bind="recipes[index]"
-        :key="recipe.id"
-      /> -->
-      <RecipeCard
-        v-for="(recipe, index) in searchFiltered"
-        v-bind="recipes[index]"
-        :key="recipe.id"
-        @favoriteUpdated="updateFavorite(recipe)"
-      />
+      <!-- <RecipeDetail :recipe="recipes[0]"/> -->
+      <div class="card-holder">
+        <RecipeCard
+          v-for="(recipe, index) in searchFiltered"
+          v-bind="recipes[index]"
+          :key="recipe.id"
+          @favoriteUpdated="updateFavorite(recipe)"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -30,6 +28,7 @@ export default {
   components: {
     Recipe,
     RecipeCard,
+    RecipeDetail,
     // RecipeNav,
     SearchBar
   },
@@ -109,13 +108,14 @@ export default {
     searchFiltered: function() {
       if (this.searchTerm) {
         const results = this.recipes.filter(searched => {
-          if (
-            searched.description.includes(this.searchTerm) ||
+            if (
+                searched.description.includes(this.searchTerm) ||
             searched.ingredients.includes(this.searchTerm) ||
             searched.name.includes(this.searchTerm) ||
-            searched.keywords.includes(this.searchTerm)
+            searched.keywords.includes(this.searchTerm) ||
+            searched.instructions.includes(this.searchTerm)
           ) {
-            return true;
+              return true;
           }
         });
         return results;
@@ -231,13 +231,32 @@ export default {
 import Recipe from "./Recipe.vue";
 // import RecipeNav from "./RecipeNav.vue";
 import RecipeCard from "./RecipeCard.vue";
+import RecipeDetail from "./RecipeDetail.vue";
 import SearchBar from "./SearchBar.vue";
 </script>
 
 <style>
+.center-panel {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  max-width: 1200px;
+  min-width: 80vw;
+  min-height: 100vh;
+  background-color: white;
+  margin: auto;
+  padding: 1.75em;
+  /* border: 1px solid black; */
+}
 .recipe-holder {
   display: flex;
   flex-wrap: wrap;
   margin: auto auto;
+}
+.card-holder {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: -1em;
 }
 </style>

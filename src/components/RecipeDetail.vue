@@ -1,73 +1,57 @@
 <template>
-  <div class="md-card-holder">
-    <md-card md-with-hover>
-      <md-card-header>
-        <div class="md-title">{{ name }}</div>
-        <md-card-subheader>{{ description }}</md-card-subheader>
-        <md-card-content>
-          <md-button v-for="tag in keywords" :key="tag">{{ tag }}</md-button>
-        </md-card-content>
-        <!-- <img :src="image" class="featured-image" /> -->
+  <div>
+    <h2 class="md-display-3">
+      {{ recipe.name }}
+      <i class="material-icons favorite" @click="favorite = !favorite">
+        {{ favorite ? "favorite" : "favorite_border" }}
+      </i>
+    </h2>
+    
 
-        <md-card-expand>
-          <md-card-actions md-alignment="space-between">
-            <div>
-              <i class="material-icons favorite" @click="favorite = !favorite">
-                {{ favorite ? "favorite" : "favorite_border" }}
-              </i>
-            </div>
+    <p class="md-subheading">{{ recipe.description }}</p>
+      <md-button v-for="tag in recipe.keywords" :key="tag">{{ tag }}</md-button>
+    <img :src="recipe.image" class="md-layout-item md-large-size-50" />
+    
+    <div class="md-layout md-gutter steps-holder">
+      <div class="md-layout-item md-medium-size-50 md-small-size-100">
+        <h4 class="md-title">Ingredients</h4>
+        <ul>
+          <li v-for="ingredient in recipe.ingredients" :key="ingredient">
+            {{ ingredient }}
+          </li>
+        </ul>
+      </div>
 
-            <md-card-expand-trigger>
-              <md-button class="md-icon-button">
-                <md-icon>keyboard_arrow_down</md-icon>
-              </md-button>
-            </md-card-expand-trigger>
-          </md-card-actions>
+      <div class="md-layout-item md-medium-size-50 md-small-size-100">
+        <h4 class="md-title">Instructions</h4>
+        <ol>
+          <li v-for="step in recipe.instructions" :key="step">{{ step }}</li>
+        </ol>
+      </div>
+    </div>
 
-          <md-card-expand-content>
-            <md-card-content
-              ><ul>
-                <li v-for="ingredient in ingredients" :key="ingredient">
-                  {{ ingredient }}
-                </li>
-              </ul>
-              <ol>
-                <li v-for="step in instructions" :key="step">{{ step }}</li>
-              </ol>
-            </md-card-content>
-          </md-card-expand-content>
-        </md-card-expand>
-      </md-card-header>
-    </md-card md-with-hover>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Recipe",
+  name: "RecipeDetail",
   props: {
-    favorite: Boolean,
-    id: Number,
-    name: String,
-    description: String,
-    keywords: Array,
-    cookTime: String,
-    cookingMethod: String,
-    ingredients: Array,
-    nutrition: String,
-    prepTime: Number,
-    recipeCategory: String,
-    recipeCusine: String,
-    recipeInstructions: Array,
-    recipeYield: Number,
-    totalTime: Number,
-    image: String,
-    instructions: Array
+    recipe: Object
   }
 };
 </script>
 
 <style scoped>
+.featured-image {
+  padding: 0px;
+  width: 50%;
+}
+.steps-holder {
+  padding: 5em;
+  line-height: 2em;
+  justify-content: space-around;
+}
 .favorite {
   color: red;
 }
@@ -77,11 +61,11 @@ export default {
 .md-card-holder {
   display: flex;
 }
-.md-card {
-  min-width: 250px;
-  width: 20vw;
-  margin: 1em;
-  display: inline;
-  vertical-align: top;
+ol, ul {
+  padding-left: 0px;
+  list-style: none;
+}
+ol li {
+  padding-bottom: 1em;
 }
 </style>

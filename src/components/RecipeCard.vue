@@ -1,11 +1,11 @@
 <template>
-  <md-card md-with-hover>
+  <md-card>
     <md-card-media-cover md-text-scrim>
       <md-card-media md-ratio="1:1">
         <img :src="image" />
       </md-card-media>
 
-      <md-card-area class="extra-gradient">
+      <md-card-area class="custom-card">
         <md-card-header>
           <span class="md-title">{{ name }}</span>
           <!-- <span class="md-subhead">
@@ -25,10 +25,7 @@
             </i>
           </md-button>
 
-          <md-button
-            >Read Recipe<md-icon class="icon-right"
-              >keyboard_arrow_right</md-icon
-            >
+          <md-button>Read Recipe<md-icon class="icon-right">keyboard_arrow_right</md-icon>
           </md-button>
         </md-card-actions>
       </md-card-area>
@@ -49,12 +46,12 @@ export default {
     cookingMethod: String,
     ingredients: Array,
     nutrition: String,
-    prepTime: Number,
+    prepTime: String,
     recipeCategory: String,
     recipeCusine: String,
     recipeInstructions: Array,
-    recipeYield: Number,
-    totalTime: Number,
+    recipeYield: String,
+    totalTime: String,
     image: String,
     instructions: Array
   },
@@ -82,18 +79,19 @@ export default {
   transform: translateY(-0.075em);
 }
 .md-card {
-  min-width: 250px;
-  width: 20vw;
+  min-width: 300px;
+  max-width: 600px;
+  /* width: 20vw; */
+  flex-grow: 1;
   margin: 1em;
   display: inline;
   vertical-align: top;
 }
-.extra-gradient {
+.custom-card {
   background: linear-gradient(
     rgba(0, 0, 0, 0) 10%,
     rgba(0, 0, 0, 0.3) 66%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+    rgba(0, 0, 0, 0.5) 100%);
 }
 .md-card-content {
   text-align: left;
