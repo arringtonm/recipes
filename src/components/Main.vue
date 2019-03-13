@@ -1,8 +1,12 @@
 <template>
   <div>
-    <!-- <RecipeNav :recipes="this.recipes" /> -->
+    <SearchBar
+      :searchTerm="searchTerm"
+      @searchTermUpdated="searchTerm = $event"
+    />
+    <RecipeNav :recipes="searchFiltered" />
     <Recipe
-      v-for="(recipe, index) in recipes"
+      v-for="(recipe, index) in searchFiltered"
       v-bind="recipes[index]"
       :key="recipe.id"
       class="truncated"
@@ -14,10 +18,11 @@
 import axios from "axios";
 
 export default {
-  name: "HelloWorld",
+  name: "Main",
   components: {
     Recipe,
-    RecipeNav
+    RecipeNav,
+    SearchBar
   },
   methods: {
     // method to grab all
@@ -26,14 +31,17 @@ export default {
         method: "get",
         url: "https://recipe-f536.restdb.io/rest/recipes",
         headers: {
+          // eslint-disable-next-line
           "x-apikey": API_KEY
         }
       })
         .then(response => {
+          // eslint-disable-next-line
           const { data, status } = response;
           this.recipes = [...data];
         })
         .catch(function(error) {
+          // eslint-disable-next-line
           console.log({ error });
         });
     },
@@ -43,6 +51,7 @@ export default {
         method: "post",
         url: `https://recipe-f536.restdb.io/rest/recipes`,
         headers: {
+          // eslint-disable-next-line
           "x-apikey": API_KEY
         },
         data: recipe
@@ -51,6 +60,7 @@ export default {
           this.recipes.push(response);
         })
         .catch(function(error) {
+          // eslint-disable-next-line
           console.log(error);
         });
     },
@@ -63,8 +73,28 @@ export default {
   mounted: function() {
     this.getRecipes();
   },
+  computed: {
+    searchFiltered: function() {
+      if (this.searchTerm) {
+        const results = this.recipes.filter(searched => {
+          if (
+            searched.description.includes(this.searchTerm) ||
+            searched.ingredients.includes(this.searchTerm) ||
+            searched.name.includes(this.searchTerm) ||
+            searched.keywords.includes(this.searchTerm)
+          ) {
+            return true;
+          }
+        });
+        return results;
+      } else {
+        return this.recipes;
+      }
+    }
+  },
   data: function() {
     return {
+      searchTerm: "",
       recipes: [
         // {
         //   id: 0,
@@ -168,6 +198,7 @@ export default {
 
 import Recipe from "./Recipe.vue";
 import RecipeNav from "./RecipeNav.vue";
+import SearchBar from "./SearchBar.vue";
 </script>
 
 <style scoped>

@@ -4,7 +4,8 @@ import "./registerServiceWorker";
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
-import API_KEY from "./.env";
+// eslint-disable-next-line to ignore the next line.
+import API_KEY from "./components/.env";
 
 Vue.use(VueMaterial);
 
