@@ -19,7 +19,7 @@
       </div>
 
       <div>
-        <img :src="recipe.image" :alt="recipe.name" class="md-medium-size-30 md-small-size-50" />
+        <img :src="recipe.image" :alt="recipe.name" class="md-medium-size-50 md-small-size-30" />
       </div>
     </div>
 

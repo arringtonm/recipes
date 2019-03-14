@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <div class="md-elevation-5 md-alignment-horizontal-center"> -->
-    <h1 class="md-display-3 myheader" role="button" @click="goHome">mike's bytes</h1>
+    <h1 class="md-display-3 myheader" role="button" @click="goHome">liz's bytes</h1>
     <md-field md-inline id="seachinputholder">
       <md-icon>search</md-icon>
       <label>Search</label>
