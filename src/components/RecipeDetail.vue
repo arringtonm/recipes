@@ -13,8 +13,8 @@
         </h2>
         <p class="md-subheading">{{ recipe.description }}</p>
         <p class="tags">Tags:</p>
-        <md-button v-for="tag in recipe.keywords" :key="tag" class="keyword" >{{
-          tag
+        <md-button v-for="keyword in recipe.keywords" :key="keyword" class="keyword" @click="chooseKeyword(keyword)">{{
+          keyword
         }}</md-button>
       </div>
 
@@ -53,8 +53,10 @@ export default {
   },
   methods: {
     favoriteSwap() {
-      console.log('from detailview');
       this.$emit("favoriteUpdated", this.recipe);
+    },
+    chooseKeyword(keyword) {
+      this.$emit("keywordPicked", keyword);
     }
   }
   // computed: {

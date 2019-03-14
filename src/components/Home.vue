@@ -8,13 +8,6 @@
     />
     <!-- <RecipeNav :recipes="searchFiltered" /> -->
     <div v-if="!detailView" class="card-holder">
-      <!-- <RecipeCard
-        v-for="(recipe, index) in searchFiltered"
-        v-bind="recipes[index]"
-        :key="recipe._id"
-        @favoriteUpdated="updateFavorite(recipe)"
-        @recipeSelected="selectRecipe(recipe)"
-      /> -->
       <RecipeCard
         v-for="recipe in searchFiltered"
         :key="recipe._id" :recipe="recipe"
@@ -23,7 +16,11 @@
       />
     </div> 
     <div v-if="detailView" class="recipe-holder">
-      <RecipeDetail :recipe="activeRecipe" @favoriteUpdated='updateDetailFavorite()' />
+      <RecipeDetail
+      :recipe="activeRecipe"
+      @favoriteUpdated='updateDetailFavorite()'
+      @keywordPicked="sortByKeyword"
+      />
     </div>
   </div>
 </template>
@@ -107,6 +104,11 @@ export default {
       history.pushState(null, "/", recipeName);
       // force browser to scroll to top of page:
       window.scrollTo(0,0);
+    },
+    sortByKeyword: function(keyword) {
+      // console.log(keyword)
+      this.goHome();
+      this.searchTerm = keyword;
     },
     goHome: function() {
       const recipeName = this.activeRecipe.name.replace(/\s+/g, '-').toLowerCase();
