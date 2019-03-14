@@ -85,7 +85,8 @@ export default {
   margin-right: 2em;
 }
 .steps-holder {
-  padding: 5em;
+  margin-top: 2em;
+  padding: 0em;
   line-height: 2em;
   justify-content: space-around;
 }

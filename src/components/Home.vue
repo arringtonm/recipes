@@ -8,10 +8,16 @@
     />
     <!-- <RecipeNav :recipes="searchFiltered" /> -->
     <div v-if="!detailView" class="card-holder">
-      <RecipeCard
+      <!-- <RecipeCard
         v-for="(recipe, index) in searchFiltered"
         v-bind="recipes[index]"
-        :key="recipe.id"
+        :key="recipe._id"
+        @favoriteUpdated="updateFavorite(recipe)"
+        @recipeSelected="selectRecipe(recipe)"
+      /> -->
+      <RecipeCard
+        v-for="recipe in searchFiltered"
+        :key="recipe._id" :recipe="recipe"
         @favoriteUpdated="updateFavorite(recipe)"
         @recipeSelected="selectRecipe(recipe)"
       />
@@ -122,6 +128,7 @@ export default {
   computed: {
     searchFiltered: function() {
       if (this.searchTerm) {
+        // const query = this.searchTerm.toLowerCase();
         const results = this.recipes.filter(searched => {
           if (
             searched.description.includes(this.searchTerm) ||
@@ -130,6 +137,7 @@ export default {
             searched.keywords.includes(this.searchTerm) ||
             searched.instructions.includes(this.searchTerm)
           ) {
+            console.log(searched);
             return true;
           }
         });
@@ -138,6 +146,7 @@ export default {
         return this.recipes;
       }
     }
+    
   },
   data: function() {
     return {

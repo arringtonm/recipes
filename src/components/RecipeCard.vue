@@ -2,7 +2,7 @@
   <md-card>
     <md-card-media-cover md-text-scrim>
       <md-card-media md-ratio="1:1">
-        <img :src="image" />
+        <img :src="recipe.image" />
       </md-card-media>
 
       <md-card-area class="custom-card">
@@ -10,12 +10,12 @@
           <!-- 
           Add 'tabindex=1' and add keyboard listener to enable navigation
            -->
-            <span class="md-title custom-fake-button" role="button" @click="recipeSelectEmit" aria-role>{{ name }}</span>
+            <p class="md-title custom-fake-button" role="button" @click="recipeSelectEmit" aria-role md-alignment="top">{{ recipe.name }}</p>
         </md-card-header>
         <md-card-actions md-alignment="space-between">
           <md-button @click="favoriteSwap" class="md-icon-button">
             <i class="material-icons favorite">
-              {{ favorite ? "favorite" : "favorite_border" }}
+              {{ recipe.favorite ? "favorite" : "favorite_border" }}
             </i>
           </md-button>
           <md-button @click="recipeSelectEmit">Read Recipe<md-icon class="icon-right">keyboard_arrow_right</md-icon>
@@ -30,24 +30,27 @@
 export default {
   name: "RecipeCard",
   props: {
-    favorite: Boolean,
-    id: Number,
-    name: String,
-    description: String,
-    keywords: Array,
-    cookTime: String,
-    cookingMethod: String,
-    ingredients: Array,
-    nutrition: String,
-    prepTime: String,
-    recipeCategory: String,
-    recipeCusine: String,
-    recipeInstructions: Array,
-    recipeYield: String,
-    totalTime: String,
-    image: String,
-    instructions: Array
+    recipe: Object
   },
+  // props: {
+  //   favorite: Boolean,
+  //   id: Number,
+  //   name: String,
+  //   description: String,
+  //   keywords: Array,
+  //   cookTime: String,
+  //   cookingMethod: String,
+  //   ingredients: Array,
+  //   nutrition: String,
+  //   prepTime: String,
+  //   recipeCategory: String,
+  //   recipeCusine: String,
+  //   recipeInstructions: Array,
+  //   recipeYield: String,
+  //   totalTime: String,
+  //   image: String,
+  //   instructions: Array
+  // },
   methods: {
     favoriteSwap() {
       this.$emit("favoriteUpdated", this.recipe);
