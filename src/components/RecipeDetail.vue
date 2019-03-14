@@ -1,17 +1,28 @@
 <template>
   <div>
-    <h2 class="md-display-3">
-      {{ recipe.name }}
-      <i class="material-icons favorite" @click="favorite = !favorite">
-        {{ favorite ? "favorite" : "favorite_border" }}
-      </i>
-    </h2>
-    
+    <div class="hero-header">
+      <!-- <div class="title-pic md-medium-size-50" :style="{ backgroundImage: `url(${this.recipe.image})`, backgroundSize: 'cover' }"> -->
 
-    <p class="md-subheading">{{ recipe.description }}</p>
-      <md-button v-for="tag in recipe.keywords" :key="tag">{{ tag }}</md-button>
-    <img :src="recipe.image" class="md-layout-item md-large-size-50" />
-    
+      <div class="info-tags">
+        <h2 class="md-display-3">
+          {{ recipe.name }}
+          <i class="material-icons favorite" @click="favorite = !favorite">
+            {{ favorite ? "favorite" : "favorite_border" }}
+          </i>
+        </h2>
+        <p class="md-subheading">{{ recipe.description }}</p>
+        <md-button v-for="tag in recipe.keywords" :key="tag">{{
+          tag
+        }}</md-button>
+      </div>
+
+      <div>
+        <img :src="recipe.image" :alt="recipe.name" class="title-pic" />
+      </div>
+    </div>
+
+    <!-- <img :src="recipe.image" class="md-layout-item md-large-size-50" /> -->
+
     <div class="md-layout md-gutter steps-holder">
       <div class="md-layout-item md-medium-size-50 md-small-size-100">
         <h4 class="md-title">Ingredients</h4>
@@ -29,7 +40,6 @@
         </ol>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -39,14 +49,30 @@ export default {
   props: {
     recipe: Object
   }
+  // watched: {
+  //   heroHeaderStyle: function() {
+  //     return {
+  //       backgroundImage: 'url(' + this.recipe.image + ')',
+  //       backgroundSize: 'cover'
+  //     }
+  //   }
+  // }
 };
 </script>
 
 <style scoped>
-.featured-image {
-  padding: 0px;
-  width: 50%;
+.hero-header {
+  display: flex;
+  flex-direction: row;
 }
+.title-pic {
+  min-width: 300px;
+  height: 300px;
+}
+.info-tags {
+  margin-right: 2em;
+}
+
 .steps-holder {
   padding: 5em;
   line-height: 2em;
@@ -61,7 +87,8 @@ export default {
 .md-card-holder {
   display: flex;
 }
-ol, ul {
+ol,
+ul {
   padding-left: 0px;
   list-style: none;
 }

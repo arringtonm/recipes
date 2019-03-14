@@ -18,7 +18,9 @@ export default {
 
 <style>
 body {
-  background-color: #eee;
+  /* background-color: #efede5; */
+  background-color: #e0e0e0;
+
   display: flex;
   flex-direction: column;
   justify-content: center;

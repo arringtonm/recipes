@@ -1,5 +1,5 @@
 <template>
-  <div class="center-panel md-elevation-20"> 
+  <div class="center-panel md-elevation-20">
     <SearchBar
       :searchTerm="searchTerm"
       @searchTermUpdated="searchTerm = $event"
@@ -7,15 +7,15 @@
     />
     <!-- <RecipeNav :recipes="searchFiltered" /> -->
     <div class="recipe-holder">
-      <!-- <RecipeDetail :recipe="recipes[0]"/> -->
-      <div class="card-holder">
+      <RecipeDetail :recipe="recipes[1]" />
+      <!-- <div class="card-holder">
         <RecipeCard
           v-for="(recipe, index) in searchFiltered"
           v-bind="recipes[index]"
           :key="recipe.id"
           @favoriteUpdated="updateFavorite(recipe)"
         />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -108,14 +108,14 @@ export default {
     searchFiltered: function() {
       if (this.searchTerm) {
         const results = this.recipes.filter(searched => {
-            if (
-                searched.description.includes(this.searchTerm) ||
+          if (
+            searched.description.includes(this.searchTerm) ||
             searched.ingredients.includes(this.searchTerm) ||
             searched.name.includes(this.searchTerm) ||
             searched.keywords.includes(this.searchTerm) ||
             searched.instructions.includes(this.searchTerm)
           ) {
-              return true;
+            return true;
           }
         });
         return results;

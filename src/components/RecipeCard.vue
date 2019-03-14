@@ -25,7 +25,10 @@
             </i>
           </md-button>
 
-          <md-button>Read Recipe<md-icon class="icon-right">keyboard_arrow_right</md-icon>
+          <md-button
+            >Read Recipe<md-icon class="icon-right"
+              >keyboard_arrow_right</md-icon
+            >
           </md-button>
         </md-card-actions>
       </md-card-area>
@@ -91,7 +94,8 @@ export default {
   background: linear-gradient(
     rgba(0, 0, 0, 0) 10%,
     rgba(0, 0, 0, 0.3) 66%,
-    rgba(0, 0, 0, 0.5) 100%);
+    rgba(0, 0, 0, 0.5) 100%
+  );
 }
 .md-card-content {
   text-align: left;
