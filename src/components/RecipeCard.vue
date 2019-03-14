@@ -6,27 +6,18 @@
       </md-card-media>
 
       <md-card-area class="custom-card">
-        <md-card-header>
-          <md-button class="custom-button" @click="recipeSelectEmit">
-            <span class="md-title custom-button-content">{{ name }}</span>
-          </md-button>
-          <!-- <span class="md-subhead">
-            <ul>
-              <li v-for="tag in keywords"
-                :key="tag"
-                class="">{{ tag }}</li>
-            </ul>
-          </span> -->
+        <md-card-header class="custom-header">
+          <!-- 
+          Add 'tabindex=1' and add keyboard listener to enable navigation
+           -->
+            <span class="md-title custom-fake-button" role="button" @click="recipeSelectEmit" aria-role>{{ name }}</span>
         </md-card-header>
-
         <md-card-actions md-alignment="space-between">
           <md-button @click="favoriteSwap" class="md-icon-button">
             <i class="material-icons favorite">
               {{ favorite ? "favorite" : "favorite_border" }}
-              <!-- {{ favorite_border }} -->
             </i>
           </md-button>
-
           <md-button @click="recipeSelectEmit">Read Recipe<md-icon class="icon-right">keyboard_arrow_right</md-icon>
           </md-button>
         </md-card-actions>
@@ -59,11 +50,9 @@ export default {
   },
   methods: {
     favoriteSwap() {
-      // this.favorite = !this.favorite
       this.$emit("favoriteUpdated", this.recipe);
     },
     recipeSelectEmit() {
-      // console.log(this.recipe)
       this.$emit("recipeSelected", this.recipes);
     }
   }
@@ -87,11 +76,13 @@ export default {
 .md-card {
   min-width: 260px;
   max-width: 600px;
-  /* width: 20vw; */
   flex-grow: 1;
   margin: 1em;
   display: inline;
   vertical-align: top;
+}
+.custom-header {
+  /* position: absol  ute; */
 }
 .custom-card {
   background: linear-gradient(
@@ -105,13 +96,19 @@ export default {
   white-space: pre-wrap;
   height: 100%;
   text-align: left;
-  /* height: 500px; */
-  /* overflow-wrap: normal; */
-  /* min-height: 5em; */
-  /* padding: 0.5em; */
 }
-.custom-button-content {
-  line-height: 0.5  em;
+.custom-fake-button {
+  line-height: 1.15em !important;
+  /* 
+  /* move text to top somehow
+  /*  
+  /* margin-top: 0 !important; */
+  /* position: relative; */
+  /* top: -10em; */
+}
+.custom-fake-button:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
 .md-card-content {
   text-align: left;

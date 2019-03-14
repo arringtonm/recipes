@@ -1,9 +1,10 @@
 <template>
   <div class="center-panel md-elevation-20">
-    <SearchBar
+    <Header
       :searchTerm="searchTerm"
       @searchTermUpdated="searchTerm = $event"
       @searchReset="searchTerm = null"
+      @goHome="goHome"
     />
     <!-- <RecipeNav :recipes="searchFiltered" /> -->
     <div v-if="!detailView" class="card-holder">
@@ -16,7 +17,7 @@
       />
     </div> 
     <div v-if="detailView" class="recipe-holder">
-      <RecipeDetail :recipe="activeRecipe" />
+      <RecipeDetail :recipe="activeRecipe" @favoriteUpdated='updateDetailFavorite()' />
     </div>
   </div>
 </template>
@@ -31,8 +32,8 @@ export default {
     RecipeCard,
     RecipeDetail,
     // RecipeNav,
-    SearchBar
-  },
+    Header
+},
   methods: {
     //
     // method to grab all
@@ -71,6 +72,10 @@ export default {
         .catch(function(error) {
         });
     },
+    updateDetailFavorite: function() {
+      console.log('from home');
+      this.updateFavorite(this.activeRecipe);
+    },
     updateFavorite: function(recipe) {
       recipe.favorite = !recipe.favorite;
       axios({
@@ -88,12 +93,21 @@ export default {
         });
     },
     selectRecipe: function(recipe) {
-      this.activeRecipe = recipe;
+      // update internal state:
       this.detailView = true;
-      // console.log(recipe)
+      this.activeRecipe = recipe;
+      // manipulate navbar
+      const recipeName = recipe.name.replace(/\s+/g, '-').toLowerCase();
+      history.pushState(null, "/", recipeName);
+      // force browser to scroll to top of page:
+      window.scrollTo(0,0);
+    },
+    goHome: function() {
+      const recipeName = this.activeRecipe.name.replace(/\s+/g, '-').toLowerCase();
+      history.pushState(null, recipeName, '/');
+      this.detailView = false;
     }
-    //
-    // maintnence function for uploading original dataset to online host
+    // maintnence function for uploading original dataset to online host:
     // 
     // bigPush: function() {
     //   this.recipes.forEach(recipe => {
@@ -103,6 +117,7 @@ export default {
   },
   mounted: function() {
     this.getRecipes();
+    this.detailView = false;
   },
   computed: {
     searchFiltered: function() {
@@ -234,7 +249,7 @@ import Recipe from "./Recipe.vue";
 // import RecipeNav from "./RecipeNav.vue";
 import RecipeCard from "./RecipeCard.vue";
 import RecipeDetail from "./RecipeDetail.vue";
-import SearchBar from "./SearchBar.vue";
+import Header from "./Header.vue";
 </script>
 
 <style>
@@ -242,6 +257,7 @@ import SearchBar from "./SearchBar.vue";
   display: flex;
   flex-direction: column;
   align-content: center;
+  /* width: 1200px; */
   max-width: 1200px;
   min-width: 80vw;
   min-height: 100vh;

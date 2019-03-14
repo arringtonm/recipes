@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <div class="md-elevation-5 md-alignment-horizontal-center"> -->
-    <!-- <span class="md-display-3">Mike's Bytes</span> -->
+    <h1 class="md-display-3 myheader" role="button" @click="goHome">mike's bytes</h1>
     <md-field md-inline id="seachinputholder">
       <md-icon>search</md-icon>
       <label>Search</label>
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "SearchBar",
+  name: "Header",
   props: {
     searchTerm: String
   },
@@ -28,6 +28,9 @@ export default {
     },
     searchReset() {
       this.$emit("searchReset");
+    },
+    goHome() {
+      this.$emit("goHome");
     }
   }
 };
@@ -38,5 +41,13 @@ export default {
   /* background-color: red; */
   flex-grow: 1;
   display: inline;
+}
+.myheader {
+  margin-top: 0em;
+  font-style: italic;
+  font-family: 'Caveat', cursive;
+}
+.myheader:hover {
+  cursor: pointer;
 }
 </style>

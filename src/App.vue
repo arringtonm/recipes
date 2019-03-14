@@ -20,7 +20,6 @@ export default {
 body {
   /* background-color: #efede5; */
   background-color: #eee;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
