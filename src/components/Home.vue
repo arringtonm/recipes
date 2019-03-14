@@ -6,16 +6,17 @@
       @searchReset="searchTerm = null"
     />
     <!-- <RecipeNav :recipes="searchFiltered" /> -->
-    <div class="recipe-holder">
-      <RecipeDetail :recipe="recipes[1]" />
-      <!-- <div class="card-holder">
-        <RecipeCard
-          v-for="(recipe, index) in searchFiltered"
-          v-bind="recipes[index]"
-          :key="recipe.id"
-          @favoriteUpdated="updateFavorite(recipe)"
-        />
-      </div> -->
+    <div v-if="!detailView" class="card-holder">
+      <RecipeCard
+        v-for="(recipe, index) in searchFiltered"
+        v-bind="recipes[index]"
+        :key="recipe.id"
+        @favoriteUpdated="updateFavorite(recipe)"
+        @recipeSelected="selectRecipe(recipe)"
+      />
+    </div> 
+    <div v-if="detailView" class="recipe-holder">
+      <RecipeDetail :recipe="activeRecipe" />
     </div>
   </div>
 </template>
@@ -33,33 +34,33 @@ export default {
     SearchBar
   },
   methods: {
+    //
     // method to grab all
+    //
     getRecipes: function() {
       axios({
         method: "get",
         url: "https://recipe-f536.restdb.io/rest/recipes",
         headers: {
-          // eslint-disable-next-line
           "x-apikey": API_KEY
         }
       })
         .then(response => {
-          // eslint-disable-next-line
           const { data } = response;
           this.recipes = [...data];
         })
         .catch(function(error) {
-          // eslint-disable-next-line
           console.log({ error });
         });
     },
+    //
     // method for uploading a recipe
+    //
     pushRecipe: function(recipe) {
       axios({
         method: "post",
         url: `https://recipe-f536.restdb.io/rest/recipes`,
         headers: {
-          // eslint-disable-next-line
           "x-apikey": API_KEY
         },
         data: recipe
@@ -68,33 +69,32 @@ export default {
           this.recipes.push(response);
         })
         .catch(function(error) {
-          // eslint-disable-next-line
-          console.log(error);
         });
     },
     updateFavorite: function(recipe) {
       recipe.favorite = !recipe.favorite;
-      console.log(recipe._id);
-      console.log(recipe.favorite);
-
       axios({
         method: "patch",
         url: `https://recipe-f536.restdb.io/rest/recipes/${recipe._id}`,
         headers: {
-          // eslint-disable-next-line
           "x-apikey": API_KEY
         },
         data: { favorite: recipe.favorite }
       })
         .then(function(response) {
-          // this.recipes.push(response);
         })
         .catch(function(error) {
-          // eslint-disable-next-line
           console.log(error);
         });
+    },
+    selectRecipe: function(recipe) {
+      this.activeRecipe = recipe;
+      this.detailView = true;
+      // console.log(recipe)
     }
-
+    //
+    // maintnence function for uploading original dataset to online host
+    // 
     // bigPush: function() {
     //   this.recipes.forEach(recipe => {
     //     this.pushRecipe(recipe);
@@ -127,6 +127,8 @@ export default {
   data: function() {
     return {
       searchTerm: "",
+      detailView: false,
+      activeRecipe: "",
       recipes: [
         // {
         //   id: 0,

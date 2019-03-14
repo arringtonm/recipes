@@ -7,7 +7,9 @@
 
       <md-card-area class="custom-card">
         <md-card-header>
-          <span class="md-title">{{ name }}</span>
+          <md-button class="custom-button" @click="recipeSelectEmit">
+            <span class="md-title custom-button-content">{{ name }}</span>
+          </md-button>
           <!-- <span class="md-subhead">
             <ul>
               <li v-for="tag in keywords"
@@ -25,10 +27,7 @@
             </i>
           </md-button>
 
-          <md-button
-            >Read Recipe<md-icon class="icon-right"
-              >keyboard_arrow_right</md-icon
-            >
+          <md-button @click="recipeSelectEmit">Read Recipe<md-icon class="icon-right">keyboard_arrow_right</md-icon>
           </md-button>
         </md-card-actions>
       </md-card-area>
@@ -62,6 +61,10 @@ export default {
     favoriteSwap() {
       // this.favorite = !this.favorite
       this.$emit("favoriteUpdated", this.recipe);
+    },
+    recipeSelectEmit() {
+      // console.log(this.recipe)
+      this.$emit("recipeSelected", this.recipes);
     }
   }
 };
@@ -82,7 +85,7 @@ export default {
   transform: translateY(-0.075em);
 }
 .md-card {
-  min-width: 300px;
+  min-width: 260px;
   max-width: 600px;
   /* width: 20vw; */
   flex-grow: 1;
@@ -96,6 +99,19 @@ export default {
     rgba(0, 0, 0, 0.3) 66%,
     rgba(0, 0, 0, 0.5) 100%
   );
+}
+.custom-button {
+  text-transform: none;
+  white-space: pre-wrap;
+  height: 100%;
+  text-align: left;
+  /* height: 500px; */
+  /* overflow-wrap: normal; */
+  /* min-height: 5em; */
+  /* padding: 0.5em; */
+}
+.custom-button-content {
+  line-height: 0.5  em;
 }
 .md-card-content {
   text-align: left;

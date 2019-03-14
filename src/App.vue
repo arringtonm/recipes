@@ -19,7 +19,7 @@ export default {
 <style>
 body {
   /* background-color: #efede5; */
-  background-color: #e0e0e0;
+  background-color: #eee;
 
   display: flex;
   flex-direction: column;
