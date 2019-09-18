@@ -1,8 +1,6 @@
 <template>
   <div class="center-panel md-elevation-20">
 
-
-
     <Header
       :searchTerm="searchTerm"
       :loaded="loaded"
@@ -10,16 +8,15 @@
       @searchReset="searchTerm = null"
       @goHome="goHome"
     />
-    <!-- <RecipeNav :recipes="searchFiltered" /> -->
 
-    <!-- <LoadingSpinner v-if="!loaded"/> -->
+    <!-- <RecipeNav :recipes="recipes" /> -->
 
     <LoadingSpinner v-if="!loaded" />
 
     <div v-if="!detailView && !searchTerm" class="featured">
       <RecipeCardFeatured
-        :recipe="recipes[5]"
-        @recipeSelected="selectRecipe(recipes[5])"
+        :recipe="recipes[featuredRecipe]"
+        @recipeSelected="selectRecipe(recipes[featuredRecipe])"
         />
       <hr v-if="loaded" />
     </div>
@@ -54,16 +51,16 @@ export default {
     RecipeDetail,
     RecipeCardFeatured,
     LoadingSpinner,
-    // RecipeNav,
+    RecipeNav,
     Header
   },
   methods: {
-    // method to grab all
-    showRandom() {
-      const randomIndex = Math.floor(Math.random() * this.recipes.length);
-      this.randomRecipe = randomIndex;
-      // return randomIndex;
+    generateRandomFeatured() {
+      if (this.recipes.length >= 1 ) {
+        this.featuredRecipe = Math.floor(Math.random() * this.recipes.length);
+      }
     },
+    // method to grab all
     getRecipes: function() {
       axios({
         method: "get",
@@ -75,6 +72,7 @@ export default {
         .then(response => {
           const { data } = response;
           this.recipes = [...data];
+          this.generateRandomFeatured();
           this.loaded = true;
         })
         .catch(function(error) {
@@ -146,7 +144,6 @@ export default {
   mounted: function() {
     this.getRecipes();
     this.detailView = false;
-    this.showRandom();
   },
   computed: {
     searchFiltered: function() {
@@ -176,7 +173,7 @@ export default {
       searchTerm: "",
       detailView: false,
       activeRecipe: "",
-      randomRecipe: Number,
+      featuredRecipe: 5,
       recipes: [],
       loaded: false,
       // recipes: [
@@ -723,7 +720,7 @@ export default {
 };
 
 import Recipe from "./Recipe.vue";
-// import RecipeNav from "./RecipeNav.vue";
+import RecipeNav from "./RecipeNav.vue";
 import RecipeCard from "./RecipeCard.vue";
 import RecipeDetail from "./RecipeDetail.vue";
 import RecipeCardFeatured from "./RecipeCardFeatured.vue";
