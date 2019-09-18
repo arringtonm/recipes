@@ -46,17 +46,17 @@ import axios from "axios";
 export default {
   name: "Home",
   components: {
-    Recipe,
+    // Recipe,
     RecipeCard,
     RecipeDetail,
     RecipeCardFeatured,
     LoadingSpinner,
-    RecipeNav,
+    // RecipeNav,
     Header
   },
   methods: {
     generateRandomFeatured() {
-      if (this.recipes.length >= 1 ) {
+      if (this.recipes.length >= 1) {
         this.featuredRecipe = Math.floor(Math.random() * this.recipes.length);
       }
     },
@@ -175,7 +175,7 @@ export default {
       activeRecipe: "",
       featuredRecipe: 5,
       recipes: [],
-      loaded: false,
+      loaded: false
       // recipes: [
       //   {
       //     _id: "5c894307307bb30000028d8c",
@@ -719,8 +719,8 @@ export default {
   }
 };
 
-import Recipe from "./Recipe.vue";
-import RecipeNav from "./RecipeNav.vue";
+// import Recipe from "./Recipe.vue";
+// import RecipeNav from "./RecipeNav.vue";
 import RecipeCard from "./RecipeCard.vue";
 import RecipeDetail from "./RecipeDetail.vue";
 import RecipeCardFeatured from "./RecipeCardFeatured.vue";
