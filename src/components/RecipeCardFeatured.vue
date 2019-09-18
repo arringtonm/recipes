@@ -69,7 +69,7 @@ export default {
       this.$emit("favoriteUpdated", this.recipe);
     },
     recipeSelectEmit() {
-      this.$emit("recipeSelected", this.recipes);
+      this.$emit("recipeSelected", this.recipe);
     }
   }
 };

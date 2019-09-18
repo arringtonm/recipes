@@ -3,7 +3,7 @@
     <h1 class="md-display-3 myheader" role="button" @click="goHome">
       liz's bytes
     </h1>
-    <md-field md-inline id="seachinputholder">
+    <md-field v-if="loaded" md-inline id="seachinputholder">
       <md-icon>search</md-icon>
       <label>Search</label>
       <md-input v-model="searchTerm" v-on:input="searchUpdate" id="searchinput">
@@ -17,7 +17,8 @@
 export default {
   name: "Header",
   props: {
-    searchTerm: String
+    searchTerm: String,
+    loaded: Boolean
   },
   data: function() {
     return {};

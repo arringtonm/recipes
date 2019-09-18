@@ -1,16 +1,27 @@
 <template>
   <div class="center-panel md-elevation-20">
+
+
+
     <Header
       :searchTerm="searchTerm"
+      :loaded="loaded"
       @searchTermUpdated="searchTerm = $event"
       @searchReset="searchTerm = null"
       @goHome="goHome"
     />
     <!-- <RecipeNav :recipes="searchFiltered" /> -->
 
+    <!-- <LoadingSpinner v-if="!loaded"/> -->
+
+    <h3 v-if="!loaded">Loading...</h3>
+
     <div v-if="!detailView && !searchTerm" class="featured">
-      <RecipeCardFeatured :recipe="recipes[5]" />
-      <hr />
+      <RecipeCardFeatured
+        :recipe="recipes[5]"
+        @recipeSelected="selectRecipe(recipes[5])"
+        />
+      <hr v-if="loaded" />
     </div>
 
     <div v-if="!detailView" class="card-holder">
@@ -42,6 +53,7 @@ export default {
     RecipeCard,
     RecipeDetail,
     RecipeCardFeatured,
+    LoadingSpinner,
     // RecipeNav,
     Header
   },
@@ -49,7 +61,8 @@ export default {
     // method to grab all
     showRandom() {
       const randomIndex = Math.floor(Math.random() * this.recipes.length);
-      return randomIndex;
+      this.randomRecipe = randomIndex;
+      // return randomIndex;
     },
     getRecipes: function() {
       axios({
@@ -62,6 +75,7 @@ export default {
         .then(response => {
           const { data } = response;
           this.recipes = [...data];
+          this.loaded = true;
         })
         .catch(function(error) {
           console.log({ error });
@@ -161,7 +175,9 @@ export default {
       searchTerm: "",
       detailView: false,
       activeRecipe: "",
+      randomRecipe: Number,
       recipes: [],
+      loaded: false,
       // recipes: [
       //   {
       //     _id: "5c894307307bb30000028d8c",
@@ -710,6 +726,7 @@ import Recipe from "./Recipe.vue";
 import RecipeCard from "./RecipeCard.vue";
 import RecipeDetail from "./RecipeDetail.vue";
 import RecipeCardFeatured from "./RecipeCardFeatured.vue";
+import LoadingSpinner from "./LoadingSpinner.vue";
 import Header from "./Header.vue";
 </script>
 
