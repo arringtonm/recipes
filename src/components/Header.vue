@@ -1,7 +1,8 @@
 <template>
   <div>
-    <!-- <div class="md-elevation-5 md-alignment-horizontal-center"> -->
-    <h1 class="md-display-3 myheader" role="button" @click="goHome">liz's bytes</h1>
+    <h1 class="md-display-3 myheader" role="button" @click="goHome">
+      liz's bytes
+    </h1>
     <md-field md-inline id="seachinputholder">
       <md-icon>search</md-icon>
       <label>Search</label>
@@ -10,7 +11,6 @@
       <md-button @click="searchReset">Reset filters </md-button>
     </md-field>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -45,7 +45,7 @@ export default {
 .myheader {
   margin-top: 0em;
   font-style: italic;
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
 }
 .myheader:hover {
   cursor: pointer;

@@ -8,9 +8,19 @@
       <md-card-area class="custom-card">
         <md-card-header class="custom-header">
           <!-- <span class="md-subheading">Featured Recipe</span> -->
-          <p class="md-display-2 custom-fake-button" role="button" @click="recipeSelectEmit" aria-role md-alignment="top">{{ recipe.name }}</p>
-          <span class="md-title custom-description">{{ recipe.description }}</span>
-          <br><br>
+          <p
+            class="md-display-2 custom-fake-button"
+            role="button"
+            @click="recipeSelectEmit"
+            aria-role
+            md-alignment="top"
+          >
+            {{ recipe.name }}
+          </p>
+          <span class="md-title custom-description">{{
+            recipe.description
+          }}</span>
+          <br /><br />
         </md-card-header>
         <md-card-actions md-alignment="space-between">
           <md-button @click="favoriteSwap" class="md-icon-button">
@@ -18,7 +28,10 @@
               {{ recipe.favorite ? "favorite" : "favorite_border" }}
             </i>
           </md-button>
-          <md-button @click="recipeSelectEmit">Read Recipe<md-icon class="icon-right">keyboard_arrow_right</md-icon>
+          <md-button @click="recipeSelectEmit"
+            >Read Recipe<md-icon class="icon-right"
+              >keyboard_arrow_right</md-icon
+            >
           </md-button>
         </md-card-actions>
       </md-card-area>

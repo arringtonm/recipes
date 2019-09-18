@@ -8,18 +8,24 @@
           <i class="material-icons favorite" @click="favoriteSwap">
             {{ recipe.favorite ? "favorite" : "favorite_border" }}
           </i>
-
-
         </h2>
         <p class="md-subheading">{{ recipe.description }}</p>
         <p class="tags">Tags:</p>
-        <md-button v-for="keyword in recipe.keywords" :key="keyword" class="keyword" @click="chooseKeyword(keyword)">{{
-          keyword
-        }}</md-button>
+        <md-button
+          v-for="keyword in recipe.keywords"
+          :key="keyword"
+          class="keyword"
+          @click="chooseKeyword(keyword)"
+          >{{ keyword }}</md-button
+        >
       </div>
 
       <div>
-        <img :src="recipe.image" :alt="recipe.name" class="md-medium-size-50 md-small-size-30" />
+        <img
+          :src="recipe.image"
+          :alt="recipe.name"
+          class="md-medium-size-50 md-small-size-30"
+        />
       </div>
     </div>
 

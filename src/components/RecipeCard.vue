@@ -10,7 +10,15 @@
           <!-- 
           Add 'tabindex=1' and add keyboard listener to enable navigation
            -->
-            <p class="md-title custom-fake-button" role="button" @click="recipeSelectEmit" aria-role md-alignment="top">{{ recipe.name }}</p>
+          <p
+            class="md-title custom-fake-button"
+            role="button"
+            @click="recipeSelectEmit"
+            aria-role
+            md-alignment="top"
+          >
+            {{ recipe.name }}
+          </p>
         </md-card-header>
         <md-card-actions md-alignment="space-between">
           <md-button @click="favoriteSwap" class="md-icon-button">
@@ -18,7 +26,10 @@
               {{ recipe.favorite ? "favorite" : "favorite_border" }}
             </i>
           </md-button>
-          <md-button @click="recipeSelectEmit">Read Recipe<md-icon class="icon-right">keyboard_arrow_right</md-icon>
+          <md-button @click="recipeSelectEmit"
+            >Read Recipe<md-icon class="icon-right"
+              >keyboard_arrow_right</md-icon
+            >
           </md-button>
         </md-card-actions>
       </md-card-area>
