@@ -46,9 +46,7 @@ export default {
     Header
   },
   methods: {
-    //
     // method to grab all
-    //
     showRandom() {
       const randomIndex = Math.floor(Math.random() * this.recipes.length);
       return randomIndex;
@@ -69,9 +67,7 @@ export default {
           console.log({ error });
         });
     },
-    //
     // method for uploading a recipe
-    //
     pushRecipe: function(recipe) {
       axios({
         method: "post",
@@ -116,7 +112,6 @@ export default {
       window.scrollTo(0, 0);
     },
     sortByKeyword: function(keyword) {
-      // console.log(keyword)
       this.goHome();
       this.searchTerm = keyword;
     },
@@ -128,7 +123,6 @@ export default {
       this.detailView = false;
     }
     // maintnence function for uploading original dataset to online host:
-    //
     // bigPush: function() {
     //   this.recipes.forEach(recipe => {
     //     this.pushRecipe(recipe);
@@ -143,14 +137,14 @@ export default {
   computed: {
     searchFiltered: function() {
       if (this.searchTerm) {
-        // const query = this.searchTerm.toLowerCase();
+        const query = this.searchTerm.toLowerCase();
         const results = this.recipes.filter(searched => {
           if (
-            searched.description.includes(this.searchTerm) ||
-            searched.ingredients.includes(this.searchTerm) ||
-            searched.name.includes(this.searchTerm) ||
-            searched.keywords.includes(this.searchTerm) ||
-            searched.instructions.includes(this.searchTerm)
+            searched.description.includes(query) ||
+            searched.ingredients.includes(query) ||
+            searched.name.includes(query) ||
+            searched.keywords.includes(query) ||
+            searched.instructions.includes(query)
           ) {
             console.log(searched);
             return true;
@@ -167,7 +161,7 @@ export default {
       searchTerm: "",
       detailView: false,
       activeRecipe: "",
-      recipes: []
+      recipes: [],
       // recipes: [
       //   {
       //     _id: "5c894307307bb30000028d8c",
@@ -733,8 +727,9 @@ import Header from "./Header.vue";
   flex-direction: column;
   align-content: center;
   /* width: 1200px; */
-  max-width: 1200px;
-  min-width: 80vw;
+  width: 80vw;
+  /* max-width: 1200px;
+  min-width: 80vw; */
   min-height: 100vh;
   background-color: white;
   margin: auto;
