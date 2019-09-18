@@ -14,7 +14,7 @@
 
     <!-- <LoadingSpinner v-if="!loaded"/> -->
 
-    <h3 v-if="!loaded">Loading...</h3>
+    <LoadingSpinner v-if="!loaded" />
 
     <div v-if="!detailView && !searchTerm" class="featured">
       <RecipeCardFeatured
@@ -151,16 +151,17 @@ export default {
   computed: {
     searchFiltered: function() {
       if (this.searchTerm) {
-        const query = this.searchTerm.toLowerCase();
+        // const query = this.searchTerm.toLowerCase();
+        const query = this.searchTerm;
         const results = this.recipes.filter(searched => {
           if (
+            // todo: make case insensitive search
             searched.description.includes(query) ||
             searched.ingredients.includes(query) ||
             searched.name.includes(query) ||
             searched.keywords.includes(query) ||
             searched.instructions.includes(query)
           ) {
-            console.log(searched);
             return true;
           }
         });
