@@ -1,5 +1,5 @@
 {
-  "name": "recipes",
+  "name": "recipesapp",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,9 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "npm": "^6.8.0",
+    "axios": "^0.18.1",
+    "npm": "^6.11.3",
     "register-service-worker": "^1.5.2",
+    "terser": "^4.3.1",
     "vue": "^2.5.21",
     "vue-material": "^1.0.0-beta-10.2"
   },
@@ -25,6 +26,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {

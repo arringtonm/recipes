@@ -1,6 +1,5 @@
 <template>
   <div class="center-panel md-elevation-20">
-
     <Header
       :searchTerm="searchTerm"
       :loaded="loaded"
@@ -17,7 +16,7 @@
       <RecipeCardFeatured
         :recipe="recipes[featuredRecipe]"
         @recipeSelected="selectRecipe(recipes[featuredRecipe])"
-        />
+      />
       <hr v-if="loaded" />
     </div>
 
